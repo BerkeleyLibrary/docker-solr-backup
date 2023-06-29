@@ -3,21 +3,19 @@ name: Test
 on:
   push:
   pull_request:
-    branches:
-    - main
 
 jobs:
-  docker:
+  test:
+    name: Tests the image using docker-compose with a fresh Solr server
     timeout-minutes: 10
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout
-      uses: actions/checkout@v1
+      - name: Checkout
+        uses: actions/checkout@v1
 
-    - name: Run the test script
-      run: ./test.sh
+      - name: Run the test script
+        run: bash test.sh
 
-    - name: Stop containers
-      if: always()
-      run: docker-compose down -v
+      - name: Stop containers
+        if: always()
+        run: docker-compose down -v

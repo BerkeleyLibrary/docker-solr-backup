@@ -9,4 +9,11 @@ services:
 
   solr:
     image: solr:8.11.2
-    command: solr-precreate gettingstarted
+    entrypoint:
+      - bash
+      - -c
+      - -e
+      - > 
+        precreate-core test-core1 /opt/solr/server/solr/configsets/_default;
+        precreate-core test-core2 /opt/solr/server/solr/configsets/sample_techproducts_configs;
+        solr-foreground
