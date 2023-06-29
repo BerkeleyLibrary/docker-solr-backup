@@ -1,0 +1,12 @@
+---
+
+version: "3.8"
+
+services:
+  app:
+    build: .
+    command: http://solr:8983
+
+  solr:
+    image: solr:8.11.2
+    command: solr-precreate gettingstarted
